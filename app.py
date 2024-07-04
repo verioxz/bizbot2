@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file, jsonify
 import google.generativeai as palm
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
@@ -12,12 +12,12 @@ model = "models/chat-bison-001"
 app = Flask(__name__)
 
 def generate_business_idea():
-    response = palm.chat(model=model, messages=[{"role": "user", "content": "Generate a business idea."}])
-    return response.last["content"]
+    response = palm.chat(model=model, messages=["Generate a business idea."])
+    return response['candidates'][0]['message']['content']
 
 def generate_catchphrase():
-    response = palm.chat(model=model, messages=[{"role": "user", "content": "Generate a catchphrase."}])
-    return response.last["content"]
+    response = palm.chat(model=model, messages=["Generate a catchphrase."])
+    return response['candidates'][0]['message']['content']
 
 def generate_logo(text="Logo"):
     # Create an image with white background
@@ -51,7 +51,7 @@ def catchphrases():
 @app.route("/logos")
 def logos():
     logo_image = generate_logo("Your Logo")
-    return render_template("logos.html", logo_image=logo_image)
+    return send_file(logo_image, mimetype='image/png')
 
 @app.route("/business_ideas")
 def business_ideas():
@@ -61,4 +61,3 @@ def business_ideas():
 if __name__ == "__main__":
     from waitress import serve
     serve(app, host="0.0.0.0", port=8080)
-
