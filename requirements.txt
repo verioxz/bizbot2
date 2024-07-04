@@ -1,0 +1,5 @@
+Flask>=2.0.0
+Pillow>=8.0.0
+google-generativeai
+waitress
+werkzeug>=2.0.0
