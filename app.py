@@ -12,7 +12,7 @@ model = "models/chat-bison-001"
 app = Flask(__name__)
 
 def generate_business_idea():
-    response = palm.chat(model=model, messages=["Generate 10 business ideas without any description."])
+    response = palm.chat(model=model, messages=["Generate 10 business ideas, please do not include any description."])
     return response.last
 
 def generate_catchphrase():
