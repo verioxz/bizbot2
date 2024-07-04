@@ -12,11 +12,11 @@ model = "models/chat-bison-001"
 app = Flask(__name__)
 
 def generate_business_idea():
-    response = palm.chat(model=model, messages=["Generate a business idea."])
+    response = palm.chat(model=model, messages=["Generate 10 business ideas without any description."])
     return response.last
 
 def generate_catchphrase():
-    response = palm.chat(model=model, messages=["Generate a catchphrase for a business."])
+    response = palm.chat(model=model, messages=["Generate 10 catchphrases for a business, without any description."])
     return response.last
 
 def generate_logo(text="Logo"):
