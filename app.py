@@ -13,11 +13,11 @@ app = Flask(__name__)
 
 def generate_business_idea():
     response = palm.chat(model=model, messages=["Generate a business idea."])
-    return response.get_content()
+    return response.content
 
 def generate_catchphrase():
     response = palm.chat(model=model, messages=["Generate a catchphrase for a business."])
-    return response.get_content()
+    return response.content
 
 def generate_logo(text="Logo"):
     # Create an image with white background
